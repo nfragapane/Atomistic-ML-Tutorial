@@ -1,0 +1,35 @@
+STRUCTURES: 25
+general:
+    progress: logged
+    run_id: mace-fine-tune
+
+# finetune a pre-trained MACE model ...
+model:
+    offset: +LearnableOffset()
+    many-body:
+        +mace_mp:
+            model: small
+
+# ... on structures from local files ...
+data:
+    train: ft_train.extxyz
+    valid: ft_valid.extxyz
+
+# ... on both energy and forces ...
+loss:
+    - +PerAtomEnergyLoss()
+    - +ForceRMSE()
+
+# ... with the following settings ...
+fitting:
+    trainer_kwargs:
+        max_epochs: 20
+        accelerator: auto
+
+    optimizer:
+        name: Adam
+        lr: 0.0001
+
+    auto_fit_reference_energies: true
+
+wandb: null
