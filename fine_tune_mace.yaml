@@ -23,7 +23,7 @@ loss:
 # ... with the following settings ...
 fitting:
     trainer_kwargs:
-        max_epochs: 20
+        max_epochs: 50
         accelerator: auto
 
     optimizer:
