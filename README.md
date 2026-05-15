@@ -1,1 +1,1 @@
-A hands-on introduction to training and fine-tuning machine learning interatomic potentials (MLIPs) with graph-pes, and using them to run molecular dynamics simulations using ASE.
+A collection of hands-on tutorials introducing machine learning methods for atomistic simulations and materials modelling. The tutorials cover machine-learning interatomic potentials (MLIPs), atomistic representations, molecular dynamics, and fine-tuning.
