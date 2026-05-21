@@ -7,10 +7,7 @@ general:
 
 # customise your model ...
 model:
-    offset:
-        # note the "+" prefix syntax: refer to the
-        # data2objects package for more details
-        +FixedOffset: { C: 1.02433787 }
+    offset: +LearnableOffset()
     many-body:
         # specify architecture of choice e.g. "+NequIP:"
             elements: [C]
