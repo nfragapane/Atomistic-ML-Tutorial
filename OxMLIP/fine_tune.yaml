@@ -1,0 +1,34 @@
+general:
+    progress: logged
+    run_id: fine-tune
+
+# finetune a pre-trained MACE model
+model:
+    offset: +LearnableOffset()
+    many-body:
+        +mace_mp:
+            model: # specify the keyword of the pre-trained model you want to fine-tune
+
+# point towards pre-defined fine-tuning training and validation datasets
+data:
+    train: ft_train.extxyz
+    valid: ft_valid.extxyz
+
+# 1:1 weighted loss function
+loss:
+    - +PerAtomEnergyLoss()
+    - +ForceRMSE()
+
+# training protocol
+fitting:
+    trainer_kwargs:
+        max_epochs: 50
+        accelerator: auto
+
+    optimizer:
+        name: Adam
+        lr: # specify a relatively small learning rate
+
+    auto_fit_reference_energies: true
+
+wandb: null
