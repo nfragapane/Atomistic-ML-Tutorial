@@ -41,7 +41,7 @@ loss:
 # key parameters here are the learning rate, batch size, and max_epochs- you can experiment with different values!
 fitting:
     trainer_kwargs:
-        max_epochs: 500 # we keep this small for the purposes of this class 
+        max_epochs: 250 # we keep this small for the purposes of this class, in practice you should let your models train to completion
         accelerator: auto 
         check_val_every_n_epoch: 1
 
