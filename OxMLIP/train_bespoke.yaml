@@ -10,7 +10,7 @@ model:
     offset:
         # note the "+" prefix syntax: refer to the
         # data2objects package for more details
-        +FixedOffset: { C: -148.314002 }
+        +FixedOffset: { C: 1.02433787 }
     many-body:
         # specify architecture of choice e.g. "+NequIP:"
             elements: [C]
