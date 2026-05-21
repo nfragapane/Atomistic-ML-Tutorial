@@ -1,0 +1,60 @@
+CUTOFF: 3.7 # insert a sensible cutoff (in Å)
+PATH_TRAIN: train.xyz
+PATH_TEST: test.xyz
+PATH_VALID: valid.xyz
+general:
+    progress: logged
+
+# customise your model ...
+model:
+    offset:
+        # note the "+" prefix syntax: refer to the
+        # data2objects package for more details
+        +FixedOffset: { C: -148.314002 }
+    many-body:
+        # specify architecture of choice e.g. "+NequIP:"
+            elements: [C]
+            cutoff: =/CUTOFF # reference the radial cutoff defined above
+            # specify hyperparameters
+            # check out the documentation to see which hypers are relevant, and how they should be written
+
+# direct model towards the datafiles we've just made ...
+data:
+    train:
+            path: =/PATH_TRAIN
+            shuffle: true
+            cutoff: =/CUTOFF
+    valid: 
+            path: =/PATH_VALID
+            cutoff: =/CUTOFF
+    test: 
+            path: =/PATH_TEST
+            cutoff: =/CUTOFF
+
+# specify loss function
+# here we weight energy and forces 1:1 - you can change this!
+loss:
+    - +PerAtomEnergyLoss()
+    - +ForceRMSE()
+
+# specify training protocol
+# key parameters here are the learning rate, batch size, and max_epochs- you can experiment with different values!
+fitting:
+    trainer_kwargs:
+        max_epochs: 500 # we keep this small for the purposes of this class 
+        accelerator: auto 
+        check_val_every_n_epoch: 1
+
+    optimizer:
+            name: AdamW
+            lr: 0.01 # !
+
+    scheduler:
+            name: ReduceLROnPlateau
+            factor: 0.5
+            patience: 10
+
+    loader_kwargs:
+        batch_size: 16 # !
+
+wandb: null
