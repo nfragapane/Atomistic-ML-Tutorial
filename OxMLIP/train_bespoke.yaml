@@ -1,32 +1,29 @@
 CUTOFF: 3.7 # insert a sensible cutoff (in Å)
-PATH_TRAIN: train.xyz
-PATH_TEST: test.xyz
-PATH_VALID: valid.xyz
+
 general:
     progress: logged
 
-# customise your model ...
+# CHANGE THIS (MANDATORY)
 model:
     offset: +LearnableOffset()
     many-body:
-        # specify architecture of choice e.g. "+NequIP:"
+        # SPECIFY ARCHITECTURE e.g. "+NequIP:"
             elements: [C]
-            cutoff: =/CUTOFF # reference the radial cutoff defined above
-            # specify hyperparameters
-            # check out the documentation to see which hypers are relevant, and how they should be written
+            cutoff: 3.7 # YOU CAN CHANGE THIS (OPTIONAL)
+            # SPECIFY HYPERPARAMETERS (MANDATORY- please read documentation!)
 
 # direct model towards the datafiles we've just made ...
 data:
     train:
-            path: =/PATH_TRAIN
+            path: train.xyz
             n: 1200 # we don't use the full training set here to minimise training time
             shuffle: true
             cutoff: =/CUTOFF
     valid: 
-            path: =/PATH_VALID
+            path: valid.xyz
             cutoff: =/CUTOFF
     test: 
-            path: =/PATH_TEST
+            path: test.xyz
             cutoff: =/CUTOFF
 
 # specify loss function
@@ -39,13 +36,13 @@ loss:
 # key parameters here are the learning rate, batch size, and max_epochs- you can experiment with different values!
 fitting:
     trainer_kwargs:
-        max_epochs: 250 # we keep this small for the purposes of this class, in practice you should let your models train to completion
+        max_epochs: 100 # we keep this small for the purposes of this class, in practice you should let your models train to completion
         accelerator: auto 
         check_val_every_n_epoch: 1
 
     optimizer:
             name: AdamW
-            lr: 0.01 # !
+            lr: 0.01 # YOU CAN CHANGE THIS (OPTIONAL)
 
     scheduler:
             name: ReduceLROnPlateau
@@ -53,6 +50,6 @@ fitting:
             patience: 10
 
     loader_kwargs:
-        batch_size: 16 # !
+        batch_size: 16 # YOU CAN CHANGE THIS (OPTIONAL)
 
 wandb: null
