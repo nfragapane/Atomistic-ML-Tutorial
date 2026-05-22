@@ -31,4 +31,7 @@ fitting:
 
     auto_fit_reference_energies: true
 
+    loader_kwargs:
+        batch_size: 5
+
 wandb: null
