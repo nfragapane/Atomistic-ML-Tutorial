@@ -19,6 +19,7 @@ model:
 data:
     train:
             path: =/PATH_TRAIN
+            n: 1200 # we don't use the full training set here to minimise training time
             shuffle: true
             cutoff: =/CUTOFF
     valid: 
