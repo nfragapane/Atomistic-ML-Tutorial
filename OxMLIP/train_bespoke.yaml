@@ -1,5 +1,3 @@
-CUTOFF: 3.7 # insert a sensible cutoff (in Å)
-
 general:
     progress: logged
 
