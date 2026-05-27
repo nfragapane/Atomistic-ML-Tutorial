@@ -1,3 +1,4 @@
+CUTOFF: 3.7
 general:
     progress: logged
 
@@ -7,7 +8,7 @@ model:
     many-body:
         # SPECIFY ARCHITECTURE e.g. "+NequIP:"
             elements: [C]
-            cutoff: 3.7 # YOU CAN CHANGE THIS (OPTIONAL)
+            cutoff: =/CUTOFF # YOU CAN CHANGE THIS AT THE TOP (OPTIONAL)
             # SPECIFY HYPERPARAMETERS (MANDATORY- please read documentation!)
 
 # direct model towards the datafiles we've just made ...
